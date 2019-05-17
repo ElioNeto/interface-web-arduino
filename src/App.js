@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import firebase, { auth, provider } from './firebase.js';
+import Dropdown from '../src/Componente/Dropdown/Dropdown';
 
 class App extends Component {
   constructor() {
@@ -24,11 +25,11 @@ class App extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const itemsRef = firebase.database().ref('items');
+    const itemsRef = firebase.database().ref('Aparelhos');
     const item = {
-      title: this.state.currentItem,
-      user: this.state.user.displayName || this.state.user.email,
-      email: this.state.user.email
+      title: this.state.currentItem, // Nome do aparelho
+      user: this.state.user.displayName || this.state.user.email, //Usuario criador
+      email: this.state.user.email, //validador de exibicao
     }
     itemsRef.push(item);
     this.setState({
@@ -43,7 +44,7 @@ class App extends Component {
         this.setState({ user, email });
       } 
     });
-    const itemsRef = firebase.database().ref('items');
+    const itemsRef = firebase.database().ref('Aparelhos');
 
     itemsRef.on('value', (snapshot) => {
       let items = snapshot.val();
@@ -62,7 +63,7 @@ class App extends Component {
     });
   }
   removeItem(itemId) {
-    const itemRef = firebase.database().ref(`/items/${itemId}`);
+    const itemRef = firebase.database().ref(`/Aparelhos/${itemId}`);
     itemRef.remove();
   }
   logout() {
@@ -97,6 +98,7 @@ class App extends Component {
               <button onClick={this.login}>Log In</button>              
             }
           </div>
+          
         </header>
         {this.state.user ?
           <div>
@@ -108,8 +110,8 @@ class App extends Component {
                 <form onSubmit={this.handleSubmit}>
                   <input type="text" name="username" placeholder="Seu Nome" value={this.state.user.displayName || this.state.user.email} />
                   <input type="hidden" name="email" placeholder="email" value={this.state.user.email} />
-                  <input type="text" name="currentItem" placeholder="Comando" onChange={this.handleChange} value={this.state.currentItem} />
-                  <button>Adicionar</button>
+                  <input type="text" name="currentItem" placeholder="Aparelho" onChange={this.handleChange} value={this.state.currentItem} />
+                  <button>Criar</button>
                 </form>
               </section>
               <section className='display-item'>
@@ -118,11 +120,11 @@ class App extends Component {
                   {this.state.items.map((item) => {
                     if(this.state.user.email === item.email)
                       return (
-                        <li key={item.id}>
+                        <li className='lista' key={item.id}>
                           <h3>{item.title}</h3>
                           <p>Criado por: {item.user}
                             {item.user === this.state.user.displayName || item.user === this.state.user.email ?
-                              <button onClick={() => this.removeItem(item.id)}>Delete Item</button> : null}
+                              <button onClick={() => this.removeItem(item.id)}>Delete Aparelho</button> : null}
                           </p>
                         </li>
                       )
