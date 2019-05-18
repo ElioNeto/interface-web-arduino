@@ -129,21 +129,59 @@ li p {
 form button {
   width: 100%;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 button {
-  border-radius: 2px;
+  border-radius: 30px;
   min-width: 88px;
-  background-color: #FA6900;
+  background-color: rgba(39, 122, 18, 0.521);
   cursor: pointer;
   border: 0;
   min-width: 120px;
   color: #fff;
   font-size: 14px;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  box-shadow: 0 10px 10px 0 rgba(0,0,0,.26);
   padding: 10px 6px;
 }
 
+.buttonLogin {
+  border-radius: 30px;
+  min-width: 88px;
+  background-color: rgba(39, 122, 18, 0.521);
+  border: 0;
+  min-width: 120px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 10px 10px 0 rgba(0,0,0,.26);
+  padding: 10px 6px;
+}
+
+.buttonController {
+  border-radius: 30px;
+  min-width: 88px;
+  background-color: rgba(39, 122, 18, 0.521);
+  border: 0;
+  min-width: 120px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 10px 10px 0 rgba(0,0,0,.26);
+  padding: 10px 6px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+.buttonDelete {
+  border-radius: 30px;
+  min-width: 88px;
+  background-color: rgba(212, 19, 19, 0.705);
+  border: 0;
+  min-width: 120px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 10px 10px 0 rgba(0,0,0,.26);
+  padding: 10px 6px;
+ 
+}
 .user-profile {
   position: fixed;
   bottom: 20px;

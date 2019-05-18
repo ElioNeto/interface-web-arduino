@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import firebase, { auth, provider } from './firebase.js';
-import Dropdown from '../src/Componente/Dropdown/Dropdown';
+//import SimpleModalWrapped from './Componente/Modal/Modal';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentItem: '',
+      aparelho: '',
+      raw: '',
+      funcao: '',
       username: '',
       items: [],
       user: null,
@@ -27,17 +29,35 @@ class App extends Component {
     e.preventDefault();
     const itemsRef = firebase.database().ref('Aparelhos');
     const item = {
-      title: this.state.currentItem, // Nome do aparelho
+      aparelho: this.state.aparelho, // Nome do aparelho
+      raw: this.state.raw, //Codigo IR Raw
+      funcao: this.state.funcao, //Nome do comando
       user: this.state.user.displayName || this.state.user.email, //Usuario criador
       email: this.state.user.email, //validador de exibicao
     }
     itemsRef.push(item);
     this.setState({
-      currentItem: '',
+      aparelho: '',
+      raw: '',
+      funcao: '',
       username: '',
       email: ''
     });
   }
+
+  submitRaw(codRaw) {
+    //e.preventDefault();
+    const test = firebase.database().ref('IR_RECEIVE').set(codRaw);
+    //const itemsRef = firebase.database().ref('IR_RECEIVE');
+    //const item = {raw: codRaw}
+    //itemsRef.push(codRaw);
+   // this.setState({
+    //  raw: ''
+    //});
+  }
+
+
+
   componentDidMount() {
     auth.onAuthStateChanged((user, email) => {
       if (user) {
@@ -52,9 +72,11 @@ class App extends Component {
       for (let item in items) {
         newState.push({
           id: item,
-          title: items[item].title,
+          aparelho: items[item].aparelho,
           user: items[item].user,
-          email: items[item].email
+          email: items[item].email,
+          raw: items[item].raw,
+          funcao: items[item].funcao
         });
       }
       this.setState({
@@ -91,11 +113,11 @@ class App extends Component {
       <div className='app'>
         <header>
           <div className="wrapper">
-            <h1>Comandos</h1>
+            <h1>Meus Controles</h1>
             {this.state.user ?
-              <button onClick={this.logout}>Logout</button>                
+              <button className="buttonLogin" onClick={this.logout}>Logout</button>                
               :
-              <button onClick={this.login}>Log In</button>              
+              <button className="buttonLogin" onClick={this.login}>Log In</button>              
             }
           </div>
           
@@ -110,7 +132,9 @@ class App extends Component {
                 <form onSubmit={this.handleSubmit}>
                   <input type="text" name="username" placeholder="Seu Nome" value={this.state.user.displayName || this.state.user.email} />
                   <input type="hidden" name="email" placeholder="email" value={this.state.user.email} />
-                  <input type="text" name="currentItem" placeholder="Aparelho" onChange={this.handleChange} value={this.state.currentItem} />
+                  <input type="text" name="aparelho" placeholder="Aparelho" onChange={this.handleChange} value={this.state.aparelho} />
+                  <input type="text" name="raw" placeholder="String Raw" onChange={this.handleChange} value={this.state.raw} />
+                  <input type="text" name="funcao" placeholder="Função" onChange={this.handleChange} value={this.state.funcao} />
                   <button>Criar</button>
                 </form>
               </section>
@@ -121,10 +145,11 @@ class App extends Component {
                     if(this.state.user.email === item.email)
                       return (
                         <li className='lista' key={item.id}>
-                          <h3>{item.title}</h3>
+                          <h3>{item.aparelho}</h3>
                           <p>Criado por: {item.user}
+                         <button className="buttonController"onClick={() => this.submitRaw(item.raw)}>{item.funcao}</button>
                             {item.user === this.state.user.displayName || item.user === this.state.user.email ?
-                              <button onClick={() => this.removeItem(item.id)}>Delete Aparelho</button> : null}
+                            <button className="buttonDelete"onClick={() => this.removeItem(item.id)}>Delete Função</button> : null} 
                           </p>
                         </li>
                       )
