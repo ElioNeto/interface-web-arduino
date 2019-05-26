@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
-import firebase, { auth, provider } from './firebase.js';
-//import SimpleModalWrapped from './Componente/Modal/Modal';
+import firebase, { auth, provider } from '../firebase';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       aparelho: '',
-      raw: '',
-      funcao: '',
+      raw1: '',
+      raw2: '',
+      raw3: '',
+      raw4: '',
+      funcao1: '',
+      funcao2: '',
+      funcao3: '',
+      funcao4: '',
       username: '',
       items: [],
       user: null,
@@ -20,43 +25,50 @@ class App extends Component {
     this.login = this.login.bind(this); 
     this.logout = this.logout.bind(this); 
   }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
+
   handleSubmit(e) {
     e.preventDefault();
-    const itemsRef = firebase.database().ref('Aparelhos');
+    const itemsRef = firebase.database().ref('ControleV2');
     const item = {
       aparelho: this.state.aparelho, // Nome do aparelho
-      raw: this.state.raw, //Codigo IR Raw
-      funcao: this.state.funcao, //Nome do comando
+
+      raw1: this.state.raw1, //Codigo IR Raw
+      funcao1: this.state.funcao1, //Nome do comando
+      raw2: this.state.raw2, //Codigo IR Raw
+      funcao2: this.state.funcao2, //Nome do comando
+      raw3: this.state.raw3, //Codigo IR Raw
+      funcao3: this.state.funcao3, //Nome do comando
+      raw4: this.state.raw4, //Codigo IR Raw
+      funcao4: this.state.funcao4, //Nome do comando
+
       user: this.state.user.displayName || this.state.user.email, //Usuario criador
       email: this.state.user.email, //validador de exibicao
     }
     itemsRef.push(item);
     this.setState({
       aparelho: '',
-      raw: '',
-      funcao: '',
+      raw1: '',
+      funcao1: '',
+      raw2: '',
+      funcao2: '',
+      raw3: '',
+      funcao3: '',
+      raw4: '',
+      funcao4: '',
       username: '',
       email: ''
     });
   }
 
   submitRaw(codRaw) {
-    //e.preventDefault();
-    const test = firebase.database().ref('IR_RECEIVE').set(codRaw);
-    //const itemsRef = firebase.database().ref('IR_RECEIVE');
-    //const item = {raw: codRaw}
-    //itemsRef.push(codRaw);
-   // this.setState({
-    //  raw: ''
-    //});
+    const stringRaw = firebase.database().ref('IR_RECEIVE').set(codRaw);
   }
-
-
 
   componentDidMount() {
     auth.onAuthStateChanged((user, email) => {
@@ -124,18 +136,16 @@ class App extends Component {
         </header>
         {this.state.user ?
           <div>
-            <div className='user-profile'>
-              <img src={this.state.user.photoURL} />
-            </div>
             <div className='container'>
-              <section className='add-item'>
+              <section className='add-item'> 
                 <form onSubmit={this.handleSubmit}>
-                  <input type="text" name="username" placeholder="Seu Nome" value={this.state.user.displayName || this.state.user.email} />
+                  <input type="hidden" name="username" placeholder="Seu Nome" value={this.state.user.displayName || this.state.user.email} />
                   <input type="hidden" name="email" placeholder="email" value={this.state.user.email} />
                   <input type="text" name="aparelho" placeholder="Aparelho" onChange={this.handleChange} value={this.state.aparelho} />
                   <input type="text" name="raw" placeholder="String Raw" onChange={this.handleChange} value={this.state.raw} />
                   <input type="text" name="funcao" placeholder="Função" onChange={this.handleChange} value={this.state.funcao} />
                   <button>Criar</button>
+                  <button disabled>Gravar Raw :: Em Breve</button>
                 </form>
               </section>
               <section className='display-item'>
@@ -146,7 +156,7 @@ class App extends Component {
                       return (
                         <li className='lista' key={item.id}>
                           <h3>{item.aparelho}</h3>
-                          <p>Criado por: {item.user}
+                          <p>
                          <button className="buttonController"onClick={() => this.submitRaw(item.raw)}>{item.funcao}</button>
                             {item.user === this.state.user.displayName || item.user === this.state.user.email ?
                             <button className="buttonDelete"onClick={() => this.removeItem(item.id)}>Delete Função</button> : null} 
