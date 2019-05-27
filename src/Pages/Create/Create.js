@@ -44,9 +44,9 @@ class Create extends Component {
         <Container>
           <row>&nbsp;</row>
           <center>
-          <h2>
-            Cadastro Do Controle <Badge pill variant="danger">Versão 2.0.1</Badge>
-          </h2>
+            <h2>
+              Cadastro Do Controle <Badge pill variant="danger">Versão 2.0.1</Badge>
+            </h2>
           </center>
           <Form>
             <Form.Row>
