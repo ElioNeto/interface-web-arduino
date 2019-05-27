@@ -4,10 +4,13 @@ import firebase, { auth, provider } from '../../firebase';
 import {Link} from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
 
 import logo from './logo.svg';
 
@@ -17,15 +20,22 @@ class Create extends Component {
         <div>
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="#Create">
-          <img 
+          <h1><img 
             src={logo} 
-            width="30"
-            height="30"
+            width="50"
+            height="50"
             className="d-inline-block align-top"
             alt=""
-          />
-            {' Automação '}
+          /> &nbsp; Automação</h1>
           </Navbar.Brand>
+            <Nav className="mr-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          </Nav>
+          <Form inline>
+            <Button variant="outline-info">Logout</Button>
+          </Form>
         </Navbar>
         <Container>
           <Form>
