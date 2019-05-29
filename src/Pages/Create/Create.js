@@ -4,16 +4,15 @@ import firebase, { auth, provider } from '../../firebase';
 import {Link} from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import Badge from 'react-bootstrap/Badge'
+import Badge from 'react-bootstrap/Badge';
 
 import logo from './logo.svg';
+import FormLabel from 'react-bootstrap/FormLabel';
 
 class Create extends Component {
 
@@ -21,15 +20,14 @@ class Create extends Component {
     super();
     this.state = {
       aparelho: '',
-      raw1: '',
-      funcao1: '',
-      raw2: '',
-      funcao2: '',
-      raw3: '',
-      funcao3: '',
-      raw4: '',
-      funcao4: '',
-      username: '',
+      funcao1:'',
+      cod1:'',
+      funcao2:'',
+      cod2:'',
+      funcao3:'',
+      cod3:'',
+      funcao4:'',
+      cod4:'',
       items: [],
       user: null,
       email: null
@@ -46,33 +44,31 @@ class Create extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const itemsRef = firebase.database().ref('Controle4bt');
+    const itemsRef = firebase.database().ref('Teste');
     const item = {
       aparelho: this.state.aparelho, // Nome do aparelho
-      
-      raw1: this.state.raw1, //Codigo IR Raw
-      funcao1: this.state.funcao1, //Nome do comando
-      raw2: this.state.raw2, //Codigo IR Raw
-      funcao2: this.state.funcao2, //Nome do comando
-      raw3: this.state.raw3, //Codigo IR Raw
-      funcao3: this.state.funcao3, //Nome do comando
-      raw4: this.state.raw4, //Codigo IR Raw
-      funcao4: this.state.funcao4, //Nome do comando
-      
+      funcao1: this.state.funcao1,
+      cod1: this.state.cod1,
+      funcao2: this.state.funcao2,
+      cod2: this.state.cod2,
+      funcao3: this.state.funcao3,
+      cod3: this.state.cod3,
+      funcao4: this.state.funcao4,
+      cod4: this.state.cod4,
       user: this.state.user.displayName || this.state.user.email, //Usuario criador
       email: this.state.user.email, //validador de exibicao
     }
     itemsRef.push(item);
     this.setState({
       aparelho: '',
-      raw1: '',
       funcao1: '',
-      raw2: '',
+      cod1: '',
       funcao2: '',
-      raw3: '',
+      cod2: '',
       funcao3: '',
-      raw4: '',
+      cod3: '',
       funcao4: '',
+      cod4: '',
       username: '',
       email: ''
     });
@@ -84,7 +80,7 @@ class Create extends Component {
         this.setState({ user, email });
       } 
     });
-    const itemsRef = firebase.database().ref('Controle4bt');
+    const itemsRef = firebase.database().ref('Teste');
 
     itemsRef.on('value', (snapshot) => {
       let items = snapshot.val();
@@ -93,16 +89,16 @@ class Create extends Component {
         newState.push({
           id: item,
           aparelho: items[item].aparelho,
+          funcao1: items[item].funcao1,
+          cod1: items[item].cod1,
+          funcao2: items[item].funcao2,
+          cod2: items[item].cod2,
+          funcao3: items[item].funcao3,
+          cod3: items[item].cod3,
+          funcao4: items[item].funcao4,
+          cod4: items[item].cod4,
           user: items[item].user,
           email: items[item].email,
-          raw1: items[item].raw1,
-          funcao1: items[item].funcao1,
-          raw2: items[item].raw2,
-          funcao2: items[item].funcao2,
-          raw3: items[item].raw3,
-          funcao3: items[item].funcao3,
-          raw4: items[item].raw4,
-          funcao4: items[item].funcao4
         });
       }
       this.setState({
@@ -148,9 +144,9 @@ class Create extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link><Link to="/Createv6" >Cadastro V6</Link></Nav.Link>
+            <Nav.Link><Link to="/Create">Cadastro V4</Link></Nav.Link>
+            <Nav.Link><Link to="/">Controles</Link></Nav.Link>
           </Nav>
           <Form inline>
           {this.state.user ?
@@ -168,66 +164,111 @@ class Create extends Component {
           <row>&nbsp;</row>
           <center>
             <h2>
-              Cadastro Do Controle <Badge pill variant="danger">Versão 2.0.1</Badge>
+              Controle <Badge pill variant="danger">Versão 2.0.1</Badge>
             </h2>
           </center>
-          
           <row>&nbsp;</row>
-          
           <Form onSubmit={this.handleSubmit}>
-            <input type="hidden" name="username" placeholder="Seu Nome" value={this.state.user.displayName || this.state.user.email} />
-            <input type="hidden" name="email" placeholder="email" value={this.state.user.email} />
-            <Form.Group>
-              <Form.Label>Nome do Aparelho</Form.Label>
-              <Form.Control placeholder="Entre com o Nome do Aparelho" />
+            <Form.Group controlId="formGridAddress1">
+              <Form.Label>Aparelho</Form.Label>
+              <Form.Control 
+                placeholder="Insira aqui o nome do dispositivo a ser controlado" 
+                name="aparelho" 
+                onChange={this.handleChange} 
+                value={this.state.aparelho} 
+                />
             </Form.Group>
-            
+
+            <Badge pill variant="dark">Botão 1</Badge>
             <Form.Row>
-              <Form.Group as={Col} >
-                <Form.Label>Comando Botão 1</Form.Label>
-                <Form.Control type="text" placeholder="Entre com o comando" />
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Função</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui a função desejada" 
+                  name="funcao1" 
+                  onChange={this.handleChange} 
+                  value={this.state.funcao1} 
+                />
               </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>RAW Botão 1</Form.Label>
-                <Form.Control type="text" placeholder="Entre com o código" />
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Código</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui o código da função (RAW)" 
+                  name="cod1" 
+                  onChange={this.handleChange} 
+                  value={this.state.cod1} 
+                />
               </Form.Group>
             </Form.Row>
 
+            <Badge pill variant="dark">Botão 2</Badge>
             <Form.Row>
-              <Form.Group as={Col} >
-                <Form.Label>Comando Botão 2</Form.Label>
-                <Form.Control type="text" placeholder="Entre com o comando" />
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Função</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui a função desejada" 
+                  name="funcao2" 
+                  onChange={this.handleChange} 
+                  value={this.state.funcao2} 
+                />
               </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>RAW Botão 2</Form.Label>
-                <Form.Control type="text" placeholder="Entre com o código" />
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Código</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui o código da função (RAW)" 
+                  name="cod2" 
+                  onChange={this.handleChange} 
+                  value={this.state.cod2} 
+                />
               </Form.Group>
             </Form.Row>
 
+            <Badge pill variant="dark">Botão 3</Badge>
             <Form.Row>
-              <Form.Group as={Col} >
-                <Form.Label>Comando Botão 3</Form.Label>
-                <Form.Control type="text" placeholder="Entre com o comando" />
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Função</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui a função desejada" 
+                  name="funcao3" 
+                  onChange={this.handleChange} 
+                  value={this.state.funcao3} 
+                />
               </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>RAW Botão 3</Form.Label>
-                <Form.Control type="text" placeholder="Entre com o código" />
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Código</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui o código da função (RAW)" 
+                  name="cod3" 
+                  onChange={this.handleChange} 
+                  value={this.state.cod3} 
+                />
               </Form.Group>
             </Form.Row>
 
+            <Badge pill variant="dark">Botão 4</Badge>
             <Form.Row>
-              <Form.Group as={Col} >
-                <Form.Label>Comando Botão 4</Form.Label>
-                <Form.Control type="text" placeholder="Entre com o comando" />
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Função</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui a função desejada" 
+                  name="funcao4" 
+                  onChange={this.handleChange} 
+                  value={this.state.funcao4} 
+                />
               </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>RAW Botão 4</Form.Label>
-                <Form.Control type="text" placeholder="Entre com o código" />
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Código</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui o código da função (RAW)" 
+                  name="cod4" 
+                  onChange={this.handleChange} 
+                  value={this.state.cod4} 
+                />
               </Form.Group>
             </Form.Row>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
           </Form>
           </div>
           :
