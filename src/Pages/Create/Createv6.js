@@ -10,7 +10,8 @@ import Badge from 'react-bootstrap/Badge';
 
 import Barra from '../../Component/Headder';
 
-class Create extends Component {
+
+class Createv6 extends Component {
 
   constructor() {
     super();
@@ -24,6 +25,10 @@ class Create extends Component {
       cod3:'',
       funcao4:'',
       cod4:'',
+      funcao5:'',
+      cod5:'',
+      funcao6:'',
+      cod6:'',
       items: [],
       user: null,
       email: null
@@ -40,7 +45,7 @@ class Create extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const itemsRef = firebase.database().ref('V4');
+    const itemsRef = firebase.database().ref('V6');
     const item = {
       aparelho: this.state.aparelho, // Nome do aparelho
       funcao1: this.state.funcao1,
@@ -51,6 +56,10 @@ class Create extends Component {
       cod3: this.state.cod3,
       funcao4: this.state.funcao4,
       cod4: this.state.cod4,
+      funcao5: this.state.funcao5,
+      cod5: this.state.cod5,
+      funcao6: this.state.funcao6,
+      cod6: this.state.cod6,
       user: this.state.user.displayName || this.state.user.email, //Usuario criador
       email: this.state.user.email, //validador de exibicao
     }
@@ -65,6 +74,10 @@ class Create extends Component {
       cod3: '',
       funcao4: '',
       cod4: '',
+      funcao5: '',
+      cod5: '',
+      funcao6: '',
+      cod6: '',
       username: '',
       email: ''
     });
@@ -110,7 +123,7 @@ class Create extends Component {
           <row>&nbsp;</row>
           <center>
             <h2>
-              Cadastro <small><Badge pill variant="secondary">V 2.0.1</Badge></small>
+            Cadastro <small><Badge pill variant="secondary">V 2.0.1</Badge></small>
             </h2>
           </center>
           <row>&nbsp;</row>
@@ -125,7 +138,7 @@ class Create extends Component {
                 />
             </Form.Group>
 
-            <Badge pill variant="dark">Botão 1</Badge>
+            <Badge pill variant="success">Botão 1</Badge>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Função</Form.Label>
@@ -147,7 +160,7 @@ class Create extends Component {
               </Form.Group>
             </Form.Row>
 
-            <Badge pill variant="dark">Botão 2</Badge>
+            <Badge pill variant="danger">Botão 2</Badge>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Função</Form.Label>
@@ -169,7 +182,7 @@ class Create extends Component {
               </Form.Group>
             </Form.Row>
 
-            <Badge pill variant="dark">Botão 3</Badge>
+            <Badge pill variant="primary">Botão 3</Badge>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Função</Form.Label>
@@ -191,7 +204,7 @@ class Create extends Component {
               </Form.Group>
             </Form.Row>
 
-            <Badge pill variant="dark">Botão 4</Badge>
+            <Badge pill variant="primary">Botão 4</Badge>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Função</Form.Label>
@@ -212,7 +225,51 @@ class Create extends Component {
                 />
               </Form.Group>
             </Form.Row>
-              <Button variant="primary" type="submit">
+
+            <Badge pill variant="primary">Botão 5</Badge>
+            <Form.Row>
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Função</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui a função desejada" 
+                  name="funcao5" 
+                  onChange={this.handleChange} 
+                  value={this.state.funcao5} 
+                />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Código</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui o código da função (RAW)" 
+                  name="cod5" 
+                  onChange={this.handleChange} 
+                  value={this.state.cod5} 
+                />
+              </Form.Group>
+            </Form.Row>
+
+            <Badge pill variant="primary">Botão 6</Badge>
+            <Form.Row>
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Função</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui a função desejada" 
+                  name="funcao6" 
+                  onChange={this.handleChange} 
+                  value={this.state.funcao6} 
+                />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Código</Form.Label>
+                <Form.Control
+                  placeholder="Insira aqui o código da função (RAW)" 
+                  name="cod6" 
+                  onChange={this.handleChange} 
+                  value={this.state.cod6} 
+                />
+              </Form.Group>
+            </Form.Row>
+              <Button variant="info" type="submit">
                 Submit
               </Button>
           </Form>
@@ -224,4 +281,4 @@ class Create extends Component {
       );
     }
   }
-  export default Create;
+  export default Createv6;
