@@ -22,8 +22,8 @@ class Cv4 extends Component {
       funcao4:'',
       cod4:'',
       items: [],
-      user: null,
-      email: null
+      user: '',
+      email: ''
     }
     this.login = this.login.bind(this); 
     this.logout = this.logout.bind(this); 
@@ -36,9 +36,13 @@ class Cv4 extends Component {
   }
 
   submitRaw(codRaw) {
-    firebase.database().ref('IR_RECEIVE').set(codRaw);
-    firebase.database().ref('Mensagem').set("Enviando código para o Arduino");
-    firebase.database().ref('MODO').set(3);
+    for (let index = 0; index < 50; index++) {
+      firebase.database().ref('IR_RECEIVE').set(codRaw);
+      firebase.database().ref('Mensagem').set("Enviando código para o Arduino");
+      firebase.database().ref('MODO').set(1);
+      firebase.database().ref('IR_RECEIVE').set(codRaw);      
+    }
+    firebase.database().ref('MODO').set(2);
   }
   
   componentDidMount() {
@@ -99,7 +103,6 @@ class Cv4 extends Component {
     return (
       <div>
         <Container>
-        {this.state.user ?
            <ul>
             {this.state.items.map((item) => {
             if(this.state.user.email === item.email)
@@ -139,8 +142,6 @@ class Cv4 extends Component {
                 )
                 })}
             </ul>
-          :
-          <div>Faca Login</div>}
         </Container>   
         </div>          
       );

@@ -26,8 +26,8 @@ class Cv6 extends Component {
       funcao6:'',
       cod6:'',
       items: [],
-      user: null,
-      email: null
+      user: '',
+      email: ''
     }
     this.login = this.login.bind(this); 
     this.logout = this.logout.bind(this); 
@@ -107,7 +107,6 @@ class Cv6 extends Component {
     return (
       <div>
         <Container>
-        {this.state.user ?
            <ul>
             {this.state.items.map((item) => {
             if(this.state.user.email === item.email)
@@ -157,8 +156,6 @@ class Cv6 extends Component {
                 )
                 })}
             </ul>
-          :
-          <div>Faca Login</div>}
         </Container>   
         </div>          
       );

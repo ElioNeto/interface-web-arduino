@@ -57,7 +57,7 @@ class Barra extends Component {
       return (
         <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-          <Navbar.Brand href="#Create">
+          <Navbar.Brand href="/">
           <img 
             src={logo} 
             width="30"
@@ -76,9 +76,9 @@ class Barra extends Component {
           </Nav>
           <Form inline>
           {this.state.user ?
-              <Button variant="outline-info" onClick={this.logout}>Logout</Button>              
+              <Button variant="outline-info" onClick={this.logout} href='/off'>Logout</Button>              
               : 
-              <Button variant="outline-info" onClick={this.login}>Logo In</Button>             
+              <Button variant="outline-info" onClick={this.login}>Log In</Button>             
             }
           </Form>
           </Navbar.Collapse>

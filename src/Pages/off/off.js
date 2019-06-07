@@ -1,29 +1,16 @@
 import React, { Component } from 'react';
 import firebase, { auth, provider } from '../../firebase';
-import './App.css';
-
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Badge from 'react-bootstrap/Badge';
+import './off.css';
+import {Redirect} from 'react-router-dom';
 
 import Barra from '../../Component/Headder';
-import Cv4 from '../../Component/Controles/ControleV4';
-import Cv6 from '../../Component/Controles/ControleV6';
 
-class App extends Component {
+
+class off extends Component {
 
   constructor() {
     super();
     this.state = {
-      aparelho: '',
-      funcao1:'',
-      cod1:'',
-      funcao2:'',
-      cod2:'',
-      funcao3:'',
-      cod3:'',
-      funcao4:'',
-      cod4:'',
       items: [],
       user: null,
       email: null
@@ -48,17 +35,8 @@ class App extends Component {
       for (let item in items) {
         newState.push({
           id: item,
-          aparelho: items[item].aparelho,
-          funcao1: items[item].funcao1,
-          cod1: items[item].cod1,
-          funcao2: items[item].funcao2,
-          cod2: items[item].cod2,
-          funcao3: items[item].funcao3,
-          cod3: items[item].cod3,
-          funcao4: items[item].funcao4,
-          cod4: items[item].cod4,
           user: items[item].user,
-          email: items[item].email,
+          email: items[item].email
         });
       }
       this.setState({
@@ -94,21 +72,8 @@ class App extends Component {
           <Barra />
           {this.state.user ?
           <div>
-            <Container>
-              <div>
-                <row>&nbsp;</row>
-                <center>
-                  <h2>
-                    Seus Controles <small><Badge pill variant="secondary">V 2.0.1</Badge></small>
-                  </h2>
-                </center>
-                <row>&nbsp;</row>
-              </div>
-            </Container>
-            <Row>
-              <Cv4 /> 
-              <Cv6 />
-            </Row>
+            <p>Voce esta conectado</p>
+            <Redirect to="/"/>
           </div>
             :
           <div>
@@ -118,4 +83,4 @@ class App extends Component {
       ); 
     }
   }
-  export default App;
+  export default off;

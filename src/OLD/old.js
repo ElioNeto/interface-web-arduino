@@ -154,7 +154,7 @@ class old extends Component {
             </div>
           </div>
           :
-          <div className='wrapper'>
+          <div>
             <p>Você precisa estar conectado para cadastrar</p>
           </div>
         }
