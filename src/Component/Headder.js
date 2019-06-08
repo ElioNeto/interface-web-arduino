@@ -76,7 +76,7 @@ class Barra extends Component {
           </Nav>
           <Form inline>
           {this.state.user ?
-              <Button variant="outline-info" onClick={this.logout} href='/off'>Logout</Button>              
+              <Button variant="outline-info" onClick={this.logout} href='/noLoggad'>Logout</Button>              
               : 
               <Button variant="outline-info" onClick={this.login}>Log In</Button>             
             }
