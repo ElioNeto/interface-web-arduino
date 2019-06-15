@@ -64,7 +64,7 @@ class Barra extends Component {
             height="30"
             className="d-inline-block align-top"
             alt=""
-          /> Automação <small><Badge variant="secondary">New</Badge></small>
+          /> Automação 
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -72,7 +72,7 @@ class Barra extends Component {
             <Nav.Link><Link to="/Createv6" >Cadastro V6</Link></Nav.Link>
             <Nav.Link><Link to="/Create">Cadastro V4</Link></Nav.Link>
             <Nav.Link><Link to="/">Controles</Link></Nav.Link>
-            <Nav.Link><Link to="/Old">Old</Link></Nav.Link>
+            <Nav.Link><Link to="/plan">Cadastro <Badge variant="danger">New</Badge><small></small></Link></Nav.Link>
           </Nav>
           <Form inline>
           {this.state.user ?
