@@ -39,10 +39,16 @@ class Cv6 extends Component {
     itemRef.remove();
   }
 
-  submitRaw(codRaw) {
-    firebase.database().ref('IR_RECEIVE').set(codRaw);
-    firebase.database().ref('Mensagem').set("Enviando código para o Arduino");
-    firebase.database().ref('MODO').set(3);
+  submitRaw(codRaw, cmd) {
+    for (let index = 0; index < 50; index++) {
+      firebase.database().ref('IR_RECEIVE').set(codRaw);
+      firebase.database().ref('Mensagem').set("Enviando código para o Arduino");
+      firebase.database().ref('MODO').set(1);
+      firebase.database().ref('IR_RECEIVE').set(codRaw);
+      firebase.database().ref('UltimoComandoEnviado').set(cmd);      
+    }
+    firebase.database().ref('MODO').set(0);
+    firebase.database().ref('Mensagem').set("Código enviado para o Arduino");
   }
   
   componentDidMount() {
@@ -117,29 +123,29 @@ class Cv6 extends Component {
                     <Card.Body> 
                         <Row>
                         <center>
-                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.cod1)}>
+                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.cod1, item.funcao1)}>
                         {item.funcao1}
                         </Button>
-                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.cod2)}>
+                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.cod2, item.funcao2)}>
                         {item.funcao2}
                         </Button>
                         </center>
                         </Row><Row>
                             <center>
-                        <Button variant="outline-success" onClick={() => this.submitRaw(item.cod3)}>
+                        <Button variant="outline-success" onClick={() => this.submitRaw(item.cod3, item.funcao3)}>
                         {item.funcao3}
                         </Button>
-                        <Button variant="outline-danger" onClick={() => this.submitRaw(item.cod4)}>
+                        <Button variant="outline-danger" onClick={() => this.submitRaw(item.cod4, item.funcao4)}>
                         {item.funcao4}
                         </Button>
                         </center>
                         </Row>
                         <Row>
                         <center>
-                        <Button variant="outline-success" onClick={() => this.submitRaw(item.cod5)}>
+                        <Button variant="outline-success" onClick={() => this.submitRaw(item.cod5, item.funcao5)}>
                         {item.funcao5}
                         </Button>
-                        <Button variant="outline-danger" onClick={() => this.submitRaw(item.cod6)}>
+                        <Button variant="outline-danger" onClick={() => this.submitRaw(item.cod6, item.funcao6)}>
                         {item.funcao6}
                         </Button>
                         </center>

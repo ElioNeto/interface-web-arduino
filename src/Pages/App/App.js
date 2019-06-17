@@ -9,6 +9,7 @@ import Badge from 'react-bootstrap/Badge';
 import Barra from '../../Component/Headder';
 import Cv4 from '../../Component/Controles/ControleV4';
 import Cv6 from '../../Component/Controles/ControleV6';
+import Cvplan from '../../Component/Controles/ControleNew';
 
 class App extends Component {
 
@@ -106,6 +107,7 @@ class App extends Component {
               </div>
             </Container>
             <Row>
+              <Cvplan />
               <Cv4 /> 
               <Cv6 />
             </Row>

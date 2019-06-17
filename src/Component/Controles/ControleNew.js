@@ -7,23 +7,27 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
-class Cv4 extends Component {
+class Cvplan extends Component {
 
   constructor() {
     super();
     this.state = {
-      aparelho: '',
-      funcao1:'',
-      cod1:'',
-      funcao2:'',
-      cod2:'',
-      funcao3:'',
-      cod3:'',
-      funcao4:'',
-      cod4:'',
-      items: [],
+      aparelhos: [],
       user: '',
-      email: ''
+      email: '',
+      ap1 :'',
+      ap2 :'',
+      ap3 :'',
+      ap4 :'',
+      ap5 :'',
+      ap6 :'',
+      cmd1: '',
+      cmd2: '',
+      cmd3: '',
+      cmd4: '',
+      cmd5: '',
+      cmd6: '',
+      nomeGeral: ''
     }
     this.login = this.login.bind(this); 
     this.logout = this.logout.bind(this); 
@@ -31,7 +35,7 @@ class Cv4 extends Component {
   }
 
   removeItem(itemId) {
-    const itemRef = firebase.database().ref(`/V4/${itemId}`);
+    const itemRef = firebase.database().ref(`/planificado/${itemId}`);
     itemRef.remove();
   }
 
@@ -53,29 +57,33 @@ class Cv4 extends Component {
         this.setState({ user, email });
       } 
     });
-    const itemsRef = firebase.database().ref('V4');
+    const itemsRef = firebase.database().ref('planificado');
 
     itemsRef.on('value', (snapshot) => {
-      let items = snapshot.val();
+      let aparelhos = snapshot.val();
       let newState = [];
-      for (let item in items) {
+      for (let item in aparelhos) {
         newState.push({
           id: item,
-          aparelho: items[item].aparelho,
-          funcao1: items[item].funcao1,
-          cod1: items[item].cod1,
-          funcao2: items[item].funcao2,
-          cod2: items[item].cod2,
-          funcao3: items[item].funcao3,
-          cod3: items[item].cod3,
-          funcao4: items[item].funcao4,
-          cod4: items[item].cod4,
-          user: items[item].user,
-          email: items[item].email,
+          nomeGeral: aparelhos[item].nomeGeral,
+          ap1: aparelhos[item].ap1,
+          cmd1: aparelhos[item].cmd1,
+          ap2: aparelhos[item].ap2,
+          cmd2: aparelhos[item].cmd2,
+          ap3: aparelhos[item].ap3,
+          cmd3: aparelhos[item].cmd3,
+          ap4: aparelhos[item].ap4,
+          cmd4: aparelhos[item].cmd4,
+          ap5: aparelhos[item].ap5,
+          cmd5: aparelhos[item].cmd5,
+          ap6: aparelhos[item].ap6,
+          cmd6: aparelhos[item].cmd6,
+          user: aparelhos[item].user,
+          email: aparelhos[item].email
         });
       }
       this.setState({
-        items: newState
+        aparelhos: newState
       });
     });
   }
@@ -106,29 +114,42 @@ class Cv4 extends Component {
       <div>
         <Container>
            <ul>
-            {this.state.items.map((item) => {
+            {this.state.aparelhos.map((item) => {
             if(this.state.user.email === item.email)
                 return (
                 <li>
                 <Card border="info">
-                    <Card.Header>{item.aparelho}</Card.Header>
+                    <Card.Header>{item.nomeGeral}</Card.Header>
                     <Card.Body> 
                         <Row>
                         <center>
-                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.cod1, item.funcao1)}>
-                        {item.funcao1}
+                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.ap1, item.cmd1)}>
+                        {item.cmd1}
                         </Button>
-                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.cod2, item.funcao2)}>
-                        {item.funcao2}
+                        &nbsp;&nbsp;
+                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.ap2, item.cmd2)}>
+                        {item.cmd2}
                         </Button>
                         </center>
                         </Row><Row>
                             <center>
-                        <Button variant="outline-success" onClick={() => this.submitRaw(item.cod3, item.funcao3)}>
-                        {item.funcao3}
+                        <Button variant="outline-success" onClick={() => this.submitRaw(item.ap3, item.cmd3)}>
+                        {item.cmd3}
                         </Button>
-                        <Button variant="outline-danger" onClick={() => this.submitRaw(item.cod4, item.funcao4)}>
-                        {item.funcao4}
+                        &nbsp;&nbsp;
+                        <Button variant="outline-danger" onClick={() => this.submitRaw(item.ap4, item.cmd4)}>
+                        {item.cmd4}
+                        </Button>
+                        </center>
+                        </Row>
+                        <Row>
+                        <center>
+                        <Button variant="outline-success" onClick={() => this.submitRaw(item.ap5, item.cmd5)}>
+                        {item.cmd5}
+                        </Button>
+                        &nbsp;&nbsp;
+                        <Button variant="outline-danger" onClick={() => this.submitRaw(item.ap6, item.cmd6)}>
+                        {item.cmd6}
                         </Button>
                         </center>
                         </Row>
@@ -149,4 +170,4 @@ class Cv4 extends Component {
       );
     }
   }
-  export default Cv4;
+  export default Cvplan;

@@ -69,10 +69,10 @@ class Barra extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-            <Nav.Link><Link to="/Createv6" >Cadastro V6</Link></Nav.Link>
-            <Nav.Link><Link to="/Create">Cadastro V4</Link></Nav.Link>
-            <Nav.Link><Link to="/">Controles</Link></Nav.Link>
-            <Nav.Link><Link to="/plan">Cadastro <Badge variant="danger">New</Badge><small></small></Link></Nav.Link>
+            <Nav.Link><Link to="/" className='link'>Controles</Link></Nav.Link>
+            <Nav.Link><Link to="/Create" className='link'>Cadastro V4</Link></Nav.Link>
+            <Nav.Link><Link to="/Createv6"  className='link'>Cadastro V6</Link></Nav.Link>
+            <Nav.Link><Link to="/plan" className='link'>Cadastro <Badge variant="danger">New</Badge><small></small></Link></Nav.Link>
           </Nav>
           <Form inline>
           {this.state.user ?

@@ -51,7 +51,7 @@ class Create extends Component {
       cod3: this.state.cod3,
       funcao4: this.state.funcao4,
       cod4: this.state.cod4,
-      user: this.state.user.displayName || this.state.user.email, //Usuario criador
+      user: this.state.user.displayName, //Usuario criador
       email: this.state.user.email, //validador de exibicao
     }
     itemsRef.push(item);
