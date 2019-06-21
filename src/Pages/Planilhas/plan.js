@@ -19,8 +19,8 @@ class plan extends Component {
     super()
     this.state = {
       data: [],
-      user: null,
-      email: null,
+      user: '',
+      email: '',
       ap1 :'',
       ap2 :'',
       ap3 :'',
@@ -107,8 +107,8 @@ class plan extends Component {
     }
     itemsRef.push(item);
     this.setState({
-      user: null,
-      email: null,
+      user: '',
+      email: '',
       ap1 :'',
       ap2 :'',
       ap3 :'',
@@ -123,6 +123,8 @@ class plan extends Component {
       cmd6: '',
       nomeGeral: ''
     });
+    if (window.confirm('Gravado com Sucesso'))
+    window.location.href='/';
   }
 
   render() {

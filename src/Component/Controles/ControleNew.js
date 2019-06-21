@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import firebase, { auth, provider } from '../../firebase';
+import './controles.css';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
 
 
 class Cvplan extends Component {
@@ -112,62 +114,68 @@ class Cvplan extends Component {
   render() {
     return (
       <div>
+        <Col>
         <Container>
-           <ul>
+          <Row>
             {this.state.aparelhos.map((item) => {
-            if(this.state.user.email === item.email)
+              if(this.state.user.email === item.email)
                 return (
-                <li>
-                <Card border="info">
-                    <Card.Header>{item.nomeGeral}</Card.Header>
-                    <Card.Body> 
-                        <Row>
-                        <center>
-                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.ap1, item.cmd1)}>
-                        {item.cmd1}
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button variant="outline-primary" onClick={() => this.submitRaw(item.ap2, item.cmd2)}>
-                        {item.cmd2}
-                        </Button>
-                        </center>
-                        </Row><Row>
+                  <div className='controle'> 
+                    <Col>
+                      <Card border="info">
+                        <Card.Header>{item.nomeGeral}</Card.Header>
+                        <Card.Body> 
+                          <Row>
                             <center>
-                        <Button variant="outline-success" onClick={() => this.submitRaw(item.ap3, item.cmd3)}>
-                        {item.cmd3}
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button variant="outline-danger" onClick={() => this.submitRaw(item.ap4, item.cmd4)}>
-                        {item.cmd4}
-                        </Button>
-                        </center>
-                        </Row>
-                        <Row>
-                        <center>
-                        <Button variant="outline-success" onClick={() => this.submitRaw(item.ap5, item.cmd5)}>
-                        {item.cmd5}
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button variant="outline-danger" onClick={() => this.submitRaw(item.ap6, item.cmd6)}>
-                        {item.cmd6}
-                        </Button>
-                        </center>
-                        </Row>
-                        <Row>&nbsp;</Row> 
-                        <Row>
-                            <Button variant="outline-danger" onClick={() => this.removeItem(item.id)}>
-                            Apagar Controle
+                              <Button variant="outline-primary" onClick={() => this.submitRaw(item.ap1, item.cmd1)}>
+                                {item.cmd1}
+                              </Button>
+                              &nbsp;&nbsp;
+                              <Button variant="outline-primary" onClick={() => this.submitRaw(item.ap2, item.cmd2)}>
+                                {item.cmd2}
+                              </Button>
+                            </center>
+                          </Row>
+                          <Row>
+                            <center>
+                              <Button variant="outline-success" onClick={() => this.submitRaw(item.ap3, item.cmd3)}>
+                                {item.cmd3}
+                              </Button>
+                              &nbsp;&nbsp;
+                              <Button variant="outline-danger" onClick={() => this.submitRaw(item.ap4, item.cmd4)}>
+                                {item.cmd4}
+                              </Button>
+                            </center>
+                          </Row>
+                          <Row>
+                            <center>
+                              <Button variant="outline-success" onClick={() => this.submitRaw(item.ap5, item.cmd5)}>
+                                {item.cmd5}
+                              </Button>
+                              &nbsp;&nbsp;
+                              <Button variant="outline-danger" onClick={() => this.submitRaw(item.ap6, item.cmd6)}>
+                                {item.cmd6}
+                              </Button>
+                            </center>
+                          </Row>
+                          <Row>&nbsp;</Row> 
+                          <Row>
+                            <Button variant="outline-danger" onClick={() => { if (window.confirm('Tem certeza que deseja apagar o controle?'))this.removeItem(item.id)}}>
+                              Apagar Controle
                             </Button>
-                        </Row>
-                    </Card.Body>
-                </Card>
-                </li>
+                          </Row>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  </div>
                 )
-                })}
-            </ul>
-        </Container>   
-        </div>          
-      );
-    }
+              })
+            }      
+          </Row>
+        </Container>
+        </Col>   
+      </div>          
+    );
   }
-  export default Cvplan;
+}
+export default Cvplan;

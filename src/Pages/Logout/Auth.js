@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import firebase, { auth, provider } from '../../firebase';
-import './off.css';
 import {Redirect} from 'react-router-dom';
 
 import Barra from '../../Component/Headder';
 
 
-class off extends Component {
+class Auth extends Component {
 
   constructor() {
     super();
@@ -78,9 +77,10 @@ class off extends Component {
             :
           <div>
             <p>Faça login</p>
+            <Redirect to="/"/>
           </div>}      
         </div>
       ); 
     }
   }
-  export default off;
+  export default Auth;

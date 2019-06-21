@@ -4,7 +4,6 @@ import './App.css';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Badge from 'react-bootstrap/Badge';
 
 import Barra from '../../Component/Headder';
 import Cv4 from '../../Component/Controles/ControleV4';
@@ -99,8 +98,8 @@ class App extends Component {
               <div>
                 <row>&nbsp;</row>
                 <center>
-                  <h2>
-                    Seus Controles <small><Badge pill variant="secondary">V 2.0.1</Badge></small>
+                  <h2> 
+                    Sua Coleção 
                   </h2>
                 </center>
                 <row>&nbsp;</row>
@@ -108,7 +107,11 @@ class App extends Component {
             </Container>
             <Row>
               <Cvplan />
-              <Cv4 /> 
+            </Row>
+            <Row>
+              <Cv4 />
+            </Row>
+            <Row> 
               <Cv6 />
             </Row>
           </div>
