@@ -1,0 +1,16 @@
+a{
+    text-decoration: none;
+    color: #fff;
+}
+a:hover{
+    text-decoration: none;
+    color: #fff;
+}
+a.link{
+    text-decoration: none;
+    color: #fff;
+}
+a.link:hover{
+    text-decoration: none;
+    color: #ffa;
+}
